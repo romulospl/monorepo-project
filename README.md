@@ -7,7 +7,7 @@ Este projeto demonstra a criação e configuração de um monorepo utilizando pn
 ## **Estrutura do Projeto**
 
 ```lua
-luaCopiar código
+
 monorepo-project/
   ├── packages/
   │   └── uikit/
@@ -35,7 +35,7 @@ monorepo-project/
 ### **1. Criação do Workspace**
 
 ```
-shCopiar código
+
 mkdir monorepo-project
 cd monorepo-project
 pnpm init
@@ -45,7 +45,7 @@ pnpm init
 ### **2. Inicializando o Git e Configurando o Projeto**
 
 ```
-shCopiar código
+
 git init
 echo -e "node_modules" > .gitignore
 npm pkg set type="module"
@@ -55,7 +55,7 @@ npm pkg set type="module"
 ### **3. Criando Estrutura de Pastas**
 
 ```
-shCopiar código
+
 mkdir packages apps
 
 ```
@@ -63,7 +63,7 @@ mkdir packages apps
 ### **4. Criando o UI Kit**
 
 ```
-shCopiar código
+
 cd packages
 pnpm create vite
 
@@ -72,7 +72,7 @@ pnpm create vite
 Dentro da pasta **`uikit/src`**, crie o componente **`Button`**:
 
 ```tsx
-tsxCopiar código
+
 // uikit/src/components/Button/index.tsx
 export default function ButtonTeste() {
   return (
@@ -89,7 +89,7 @@ export default function ButtonTeste() {
 Instale o plugin DTS:
 
 ```
-shCopiar código
+
 pnpm add -D vite-plugin-dts
 
 ```
@@ -97,7 +97,7 @@ pnpm add -D vite-plugin-dts
 Crie o arquivo **`vite.config.ts`**:
 
 ```
-tsCopiar código
+
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
@@ -139,7 +139,7 @@ export default defineConfig({
 Crie o arquivo **`pnpm-workspace.yaml`** na raiz do projeto:
 
 ```yaml
-yamlCopiar código
+
 packages:
   - 'apps/*'
   - 'packages/*'
@@ -151,7 +151,7 @@ packages:
 No arquivo **`package.json`** do **`web-app`**, adicione a dependência do **`uikit`**:
 
 ```json
-jsonCopiar código
+
 "dependencies": {
   "uikit": "workspace:*"
 }
@@ -161,7 +161,7 @@ jsonCopiar código
 Atualize o **`App.tsx`** do **`web-app`**:
 
 ```tsx
-tsxCopiar código
+
 // web-app/src/App.tsx
 import { ButtonTeste } from "uikit";
 
@@ -182,7 +182,7 @@ export default App;
 Crie um arquivo **`.npmrc`** na raiz do **`uikit`**:
 
 ```
-plaintextCopiar código
+
 @seuNomeDeUsuario:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken=SeuToken
 
@@ -191,7 +191,7 @@ plaintextCopiar código
 Crie um arquivo **`.npmignore`**:
 
 ```
-plaintextCopiar código
+
 # Ignore everything
 *
 
@@ -207,7 +207,7 @@ plaintextCopiar código
 Atualize o **`package.json`** do **`uikit`**:
 
 ```json
-jsonCopiar código
+
 {
   "name": "@seuNomeDeUsuario/uikit",
   "private": false,
@@ -219,7 +219,7 @@ jsonCopiar código
 Publique o pacote:
 
 ```
-shCopiar código
+
 npm publish --registry=https://npm.pkg.github.com
 
 ```
@@ -231,7 +231,7 @@ Acesse [https://github.com/seuNomeDeUsuario?tab=packages](https://github.com/seu
 Crie um novo projeto **`use-component`** fora do **`monorepo-project`**:
 
 ```
-shCopiar código
+
 pnpm create vite use-component
 cd use-component
 pnpm install
@@ -241,7 +241,7 @@ pnpm install
 Adicione um arquivo **`.npmrc`** na raiz do **`use-component`**:
 
 ```
-plaintextCopiar código
+
 @seuNomeDeUsuario:registry=https://npm.pkg.github.com
 
 ```
@@ -249,7 +249,7 @@ plaintextCopiar código
 Instale o pacote **`uikit`**:
 
 ```
-shCopiar código
+
 pnpm install @seuNomeDeUsuario/uikit@0.0.0
 
 ```
@@ -257,7 +257,7 @@ pnpm install @seuNomeDeUsuario/uikit@0.0.0
 Atualize o **`App.tsx`**:
 
 ```tsx
-tsxCopiar código
+
 // use-component/src/App.tsx
 import './App.css';
 import { ButtonTeste } from '@seuNomeDeUsuario/uikit';
@@ -277,7 +277,7 @@ export default App;
 Execute a aplicação:
 
 ```
-shCopiar código
+
 pnpm run dev
 
 ```
