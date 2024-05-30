@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Mas não ignore a pasta dist
+!dist
+
+# Você também pode querer incluir o package.json e outros arquivos importantes
+!package.json
+!README.md
